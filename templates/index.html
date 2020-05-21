@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>ABSA</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+</head>
+
+<body>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">Aspect Based Sentiment Analysis</h1>
+        <hr class="my-4">
+        <p class="lead">Write down your text in order to extract sentiment.</p>
+      </div>
+    </div>
+
+    <div class="container">
+        <form method="post">
+            <div class="form-group">
+                <label for="text-area">Input your text</label>
+                <textarea class="form-control" id="text-area" rows="4" name="form"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn">Extract Sentiment</button>
+        </form>
+
+        {% if input %}
+        <div class="container border rounded" id="result">
+            {% if text %}
+            <p>{{ text }}</p>
+            {% endif %}
+            <hr>
+            <table>
+            {% for aspect in aspects %}
+                <tr>
+                    <td><span class="badge badge-dark">{{aspect['aspect']}}</span></td>
+                    {% if aspect['sentiment'] == 'positive' %}
+                        <td><span class="badge badge-success">{{aspect['sentiment']}}</span></td>
+                    {% elif aspect['sentiment'] == 'negative' %}
+                        <td><span class="badge badge-danger">{{aspect['sentiment']}}</span></td>
+                    {% else %}
+                        <td><span class="badge badge-warnign">{{aspect['sentiment']}}</span></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </table>
+        </div>
+        {% endif %}
+    </div>
+
+
+</body>
+
+</html>
